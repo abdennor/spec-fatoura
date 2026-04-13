@@ -61,7 +61,7 @@ All changes to the specification follow the **RFC (Request for Comments)** proce
 
 ### Current Phase (Initial)
 
-- **Maintainers:** Fatoura core team
+- **Maintainers:** e-facture-dz maintainers
 - **Decision process:** Maintainer approval for all changes
 
 ### Future Phase

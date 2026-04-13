@@ -31,7 +31,7 @@ e-facture-dz defines a JSON-native electronic invoicing protocol for Algeria. It
 ## Schema Structure
 
 ```
-fatoura/
+efacture/
 ├── version          # Protocol version (required)
 ├── type             # Document type (required)
 ├── id               # Unique invoice identifier (required)
@@ -56,7 +56,7 @@ fatoura/
 
 ```bash
 # Using any JSON Schema validator
-npx ajv validate -s schemas/fatoura-dz-1.0.schema.json -d your-invoice.json
+npx ajv validate -s schemas/efacture-dz-1.0.schema.json -d your-invoice.json
 ```
 
 ### 2. Use the reference validator
@@ -78,7 +78,7 @@ spec/
 ├── LICENSE                          # Apache 2.0 (schema & code)
 ├── LICENSE-SPEC                     # CC BY 4.0 (specification text)
 └── schemas/
-    └── fatoura-dz-1.0.schema.json   # JSON Schema
+    └── efacture-dz-1.0.schema.json   # JSON Schema
 ```
 
 ## Related Repositories

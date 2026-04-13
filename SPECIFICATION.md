@@ -17,7 +17,7 @@ This specification defines:
 - The JSON schema for electronic invoice documents
 - Algerian tax-specific fields and validation rules
 - Digital signature requirements
-- PDF embedding specification (Fatoura PDF)
+- PDF embedding specification (e-facture PDF)
 - Interoperability mappings with UBL 2.1 and Factur-X
 
 ### 1.2 Terminology
@@ -51,7 +51,7 @@ This specification defines:
 ### 3.1 Overview
 
 ```
-fatoura/
+efacture/
 ├── version          # Protocol version (required)
 ├── type             # Document type (required)
 ├── id               # Unique invoice identifier (required)
@@ -74,8 +74,8 @@ fatoura/
 
 ```json
 {
-  "$schema": "https://e-facture-dz.github.io/spec/schemas/fatoura-dz-1.0.schema.json",
-  "fatoura": {
+  "$schema": "https://e-facture-dz.github.io/spec/schemas/efacture-dz-1.0.schema.json",
+  "efacture": {
     "version": "1.0",
     "type": "invoice",
     "id": "FAT-2024-001234",
@@ -516,9 +516,9 @@ Algeria requires qualified electronic seals from AECE (Autorité Économique de 
 
 ---
 
-## 8. PDF Embedding (Fatoura PDF)
+## 8. PDF Embedding (e-facture PDF)
 
-A "Fatoura PDF" is a PDF/A-3 compliant file that embeds the machine-readable JSON. This enables human-readable invoices that also contain structured data for automated processing.
+An "e-facture PDF" is a PDF/A-3 compliant file that embeds the machine-readable JSON. This enables human-readable invoices that also contain structured data for automated processing.
 
 ### 8.1 File Structure
 
@@ -529,7 +529,7 @@ invoice.pdf (PDF/A-3)
 │   └── Invoice layout, logo, formatting, etc.
 │
 └── Embedded files (Associated Files - AF)
-    ├── fatoura.json          # Complete document (REQUIRED)
+    ├── efacture.json          # Complete document (REQUIRED)
     │   └── Relationship: "Data"
     │   └── MIME type: "application/json"
     │
@@ -543,26 +543,26 @@ invoice.pdf (PDF/A-3)
 | `dc:format` | `application/pdf` | Yes |
 | `pdfaid:part` | `3` | Yes |
 | `pdfaid:conformance` | `B` (basic) or `A` (accessible) | Yes |
-| `fx:DocumentType` | `fatoura` | Yes |
+| `fx:DocumentType` | `efacture` | Yes |
 | `fx:DocumentVersion` | Protocol version (e.g., `1.0`) | Yes |
-| `fx:InvoiceId` | Value of `fatoura.id` | Yes |
+| `fx:InvoiceId` | Value of `efacture.id` | Yes |
 
 ### 8.3 Embedding Rules
 
-1. **fatoura.json** MUST be embedded as an Associated File (AF) at document level
+1. **efacture.json** MUST be embedded as an Associated File (AF) at document level
 2. MUST use relationship type `Data` (AFRelationship)
 3. MUST include the complete document including signature
-4. File name MUST be `fatoura.json`
-5. The `signature` field remains inside `fatoura.json` — no separate signature file needed
+4. File name MUST be `efacture.json`
+5. The `signature` field remains inside `efacture.json` — no separate signature file needed
 6. PDF digital signatures (PAdES) are optional and independent
 
 ### 8.4 Validation
 
-A valid Fatoura PDF MUST:
+A valid e-facture PDF MUST:
 1. Be PDF/A-3 compliant
-2. Contain exactly one `fatoura.json` embedded file
-3. Have `fatoura.json` pass schema validation
-4. Have matching metadata (`fx:InvoiceId` = `fatoura.id`)
+2. Contain exactly one `efacture.json` embedded file
+3. Have `efacture.json` pass schema validation
+4. Have matching metadata (`fx:InvoiceId` = `efacture.id`)
 
 ---
 
