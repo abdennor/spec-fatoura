@@ -1,9 +1,14 @@
-import Ajv from "ajv";
+import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import { readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import type { EFactureEnvelope } from "./types.js";
+
+// @ts-ignore - ESM default import compatibility
+const AjvConstructor = (Ajv2020 as any).default ?? Ajv2020;
+// @ts-ignore - ESM default import compatibility
+const addFormatsCompat = (addFormats as any).default ?? addFormats;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -11,8 +16,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const schemaPath = join(__dirname, "../../../schemas/efacture-dz-1.0.schema.json");
 const schema = JSON.parse(readFileSync(schemaPath, "utf-8"));
 
-const ajv = new Ajv({ allErrors: true, strict: false });
-addFormats(ajv);
+const ajv = new AjvConstructor({ allErrors: true, strict: false });
+addFormatsCompat(ajv);
 const validateSchema = ajv.compile(schema);
 
 export interface ValidationError {

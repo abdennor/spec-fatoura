@@ -23,6 +23,19 @@ spec-fatoura/
 ├── LICENSE-SPEC                       # CC BY 4.0 (specification text)
 ├── instruction.md                     # This file
 ├── memory.md                          # Project context and brainstorm notes
+├── package.json                       # Monorepo root (npm workspaces)
+├── tsconfig.base.json                 # Shared TypeScript config
+├── packages/
+│   └── core/                          # @e-facture-dz/core library
+│       ├── package.json
+│       ├── tsconfig.json
+│       └── src/
+│           ├── index.ts               # Barrel exports
+│           ├── types.ts               # TypeScript interfaces
+│           ├── validator.ts           # Schema + business rule validation
+│           ├── tax.ts                 # Tax calculation utilities
+│           ├── amount-words.ts        # Number-to-words (FR/AR)
+│           └── tests/                 # Node.js test runner tests
 └── schemas/
     └── efacture-dz-1.0.schema.json    # JSON Schema (Draft 2020-12)
 ```
